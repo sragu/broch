@@ -29,21 +29,13 @@
  * have any questions.
  */
 
-package com.notechnique;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.matchers.JUnitMatchers.*;
+package com.sragu.broch;
 
 /**
- * Unit test for simple App.
+ * Hello world!
  */
-public class AppTest  {
-
-  @Test
-  public void testApp() {
-    assertTrue( true );
+public class App {
+  public static void main( String[] args ) {
+    System.out.println( "Hello World!" );
   }
 }
