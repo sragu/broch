@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'idea'
 
 repositories {  
     mavenCentral()
@@ -12,7 +13,6 @@ dependencies {
 }
 
 jar {
-    manifest {
-        attributes 'Main-Class': 'com.sragu.broch.Main'
-    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest { attributes 'Main-Class': 'com.sragu.broch.Main' }
 }
