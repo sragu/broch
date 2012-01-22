@@ -16,10 +16,3 @@ jar {
         attributes 'Main-Class': 'com.sragu.broch.Main'
     }
 }
-
-/** maybe experiment with wrapper, 
-    once we figure out how to solve the properties loading issue
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.0-milestone-7'
-}
-*/
