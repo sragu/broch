@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="sample-project" default="default">
-    <property environment="env"/>
-    <!--<include file="${env.broch.home}/build-common-tasks.xml"/>-->
-
-    <import>
-        <javaresource name="scripts/build-common-tasks.xml">
-            <classpath location="../build/libs/broch-uber.jar" />
-        </javaresource>
-    </import>
+    <include file="${user.home}/.broch/scripts/build-common-tasks.xml"/>
 
     <target name="default">
         <say word="Hello!"/>
-        <say word="${bootstrap.dir}"/>
     </target>
 </project>
