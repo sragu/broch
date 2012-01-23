@@ -11,8 +11,14 @@ public class Main {
 
         try {
             parser.parseArgument(args);
+
+            if (bean.bootstrap) {
+                new BootStrap().init();
+            }
+
         } catch (CmdLineException e) {
             System.err.println(e.getMessage());
+            System.err.println("Usage: broch --init");
             parser.printUsage(System.err);
         }
     }

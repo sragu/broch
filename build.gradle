@@ -20,6 +20,7 @@ task uber(type: Jar) {
     classifier 'uber'
 
     from sourceSets*.output.classesDir
+    from sourceSets*.output.resourcesDir
     from { configurations.runtime.collect { zipTree(it) } }
     manifest { attributes 'Main-Class': 'com.sragu.broch.Main' }
 }

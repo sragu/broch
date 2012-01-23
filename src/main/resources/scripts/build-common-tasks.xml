@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <macrodef name="say">
+        <attribute name="word"/>
+        <sequential>
+            <echo> @{word} </echo>
+        </sequential>
+    </macrodef>
+</project>
