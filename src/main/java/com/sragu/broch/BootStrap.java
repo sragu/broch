@@ -28,10 +28,10 @@ public class BootStrap {
         homeDir.mkdir();
 
         logger.debug("Home directory: {}", brochHome);
-        exportCommonScripts(homeDir);
+        exportCommonScripts(homeDir, "scripts/.+");
     }
 
-    public void exportCommonScripts(File homeDir) {
+    public void exportCommonScripts(File homeDir, String pattern) {
         try {
 
             CodeSource codeSource = BootStrap.class.getProtectionDomain().getCodeSource();
@@ -41,7 +41,7 @@ public class BootStrap {
             ZipEntry nextEntry = null;
             while ((nextEntry = stream.getNextEntry()) != null) {
                 String name = nextEntry.getName();
-                if (name.matches("scripts/.+")) {
+                if (name.matches(pattern)) {
 
                     URL resource = Resources.getResource(name);
                     File outputFile = new File(homeDir, name);
