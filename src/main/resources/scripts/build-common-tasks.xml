@@ -3,7 +3,7 @@
     <macrodef name="say">
         <attribute name="word"/>
         <sequential>
-            <echo> @{word} </echo>
+            <echo> Got this: @{word} </echo>
         </sequential>
     </macrodef>
 </project>

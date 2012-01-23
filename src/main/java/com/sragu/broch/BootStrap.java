@@ -44,19 +44,18 @@ public class BootStrap {
                 String name = nextEntry.getName();
                 if (name.startsWith("scripts") && name.endsWith("xml")) {
 
-                    logger.debug(name);
                     URL resource = Resources.getResource(name);
                     File outputFile = new File(homeDir, name);
 
                     if (outputFile.getParentFile().mkdirs()) {
-                        logger.debug("found a parent, creating: " + outputFile.getParentFile());
+                        logger.debug("Found a new parent directory, creating: {}", outputFile.getParentFile());
                     }
 
 
                     FileOutputStream output = Files.newOutputStreamSupplier(outputFile).getOutput();
                     Resources.copy(resource, output);
                     Closeables.closeQuietly(output);
-
+                    logger.debug("Copied {}", name);
                 }
 
             }
