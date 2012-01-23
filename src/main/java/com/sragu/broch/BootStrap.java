@@ -1,13 +1,15 @@
 package com.sragu.broch;
 
+import com.google.common.io.Closeables;
+import com.google.common.io.Files;
 import com.google.common.io.Resources;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import java.util.zip.ZipFile;
+import java.security.CodeSource;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
@@ -18,29 +20,45 @@ public class BootStrap {
         String brochHome = System.getProperty("user.home") + "/.broch";
         System.setProperty("broch.home", brochHome);
 
-        new File(brochHome).mkdir();
+        File homeDir = new File(brochHome);
+        homeDir.mkdir();
         System.out.println(brochHome);
 
-        exportCommonScripts(brochHome);
+        exportCommonScripts(homeDir);
     }
 
-    public void exportCommonScripts(String brochHome) {
+    public void exportCommonScripts(File homeDir) {
         try {
-//   /         ZipInputStream stream = new ZipInputStream(new FileInputStream(Resources.getResource("scripts")))
+
+            CodeSource codeSource = BootStrap.class.getProtectionDomain().getCodeSource();
+            codeSource.getLocation();
+
+            ZipInputStream stream = new ZipInputStream(codeSource.getLocation().openStream());
+
+            ZipEntry nextEntry = null;
+            while ((nextEntry = stream.getNextEntry()) != null) {
+                String name = nextEntry.getName();
+                if (name.startsWith("scripts") && name.endsWith("xml")) {
+
+                        System.out.println(name);
+                        URL resource = Resources.getResource(name);
+                        File outputFile = new File(homeDir, name);
+
+                            if(outputFile.getParentFile().mkdirs());
+                            System.out.println("found a parent, creating: " + outputFile.getParentFile());
 
 
-            System.out.println(Resources.getResource("scripts").getPath());
+                        FileOutputStream output = Files.newOutputStreamSupplier(outputFile).getOutput();
+                        Resources.copy(resource, output);
+                        Closeables.closeQuietly(output);
 
-            JarFile file = new JarFile(Resources.getResource("scripts").getPath());
+                }
 
-            Enumeration<JarEntry> entries = file.entries();
-
-            while (entries.hasMoreElements()){
-                System.out.println(entries.nextElement());
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
         }
     }
 }
