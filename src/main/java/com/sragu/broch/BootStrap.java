@@ -27,7 +27,7 @@ public class BootStrap {
         File homeDir = new File(brochHome);
         homeDir.mkdir();
 
-        logger.debug(brochHome);
+        logger.debug("Home directory: {}", brochHome);
         exportCommonScripts(homeDir);
     }
 
@@ -35,14 +35,13 @@ public class BootStrap {
         try {
 
             CodeSource codeSource = BootStrap.class.getProtectionDomain().getCodeSource();
-            codeSource.getLocation();
-
             ZipInputStream stream = new ZipInputStream(codeSource.getLocation().openStream());
+
 
             ZipEntry nextEntry = null;
             while ((nextEntry = stream.getNextEntry()) != null) {
                 String name = nextEntry.getName();
-                if (name.startsWith("scripts") && name.endsWith("xml")) {
+                if (name.matches("scripts/.+")) {
 
                     URL resource = Resources.getResource(name);
                     File outputFile = new File(homeDir, name);
@@ -61,8 +60,7 @@ public class BootStrap {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+            logger.error("Bootstrap failure.", e);
         }
     }
 }
