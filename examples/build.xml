@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="sample-project" default="default">
-    <include file="${user.home}/.broch/scripts/build-common-tasks.xml"/>
+
+    <!-- Should we prefer single import, as it resolves tasks in ide? -->
+    <include>
+        <fileset dir="${user.home}/.broch/scripts" includes="build-common-*.xml"/>
+    </include>
 
     <target name="default">
         <say word="Hello!"/>
