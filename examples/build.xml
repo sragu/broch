@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="sample-project" default="default">
+<project name="sample-project" default="-init">
 
-    <!-- Should we prefer single import, as it resolves tasks in ide? -->
+    <target name="-init">
+        <property name="build-jar-location" value=".broch-uber.jar"/>
+        <get
+            src="https://github.com/sragu/mvn-repo/raw/master/snapshots/com/sragu/broch-uber.jar" 
+            dest="${build-jar-location}"/>
+        <exec executable="java">
+            <arg value="-jar"/>
+            <arg value="${build-jar-location}"/>
+            <arg value="--init"/>
+        </exec>
+    </target>
+
+    <!-- Should we prefer single import, as it resolves tasks in ide?-->
     <include>
         <fileset dir="${user.home}/.broch/scripts" includes="build-common-*.xml"/>
     </include>
 
-    <target name="default">
+    <target name="main" description="say hello">
         <say word="Hello!"/>
     </target>
 </project>
