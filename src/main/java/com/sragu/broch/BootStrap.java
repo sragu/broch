@@ -15,6 +15,8 @@ import java.security.CodeSource;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static com.google.common.base.Strings.nullToEmpty;
+
 /**
  * Bootstraps common scripts to current dir (usually project home)
  */
@@ -22,10 +24,7 @@ public class BootStrap {
     Logger logger = LoggerFactory.getLogger(BootStrap.class);
 
     public void init(String brochHome) {
-
-        if(Strings.isNullOrEmpty(brochHome)){
-            brochHome = ".build";
-        }
+        brochHome = nullToEmpty(brochHome).concat(".build");
 
         File homeDir = new File(brochHome);
         homeDir.mkdir();

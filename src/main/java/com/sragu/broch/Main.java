@@ -18,16 +18,16 @@ public class Main {
 
         } catch (CmdLineException e) {
             System.err.println(e.getMessage());
-            System.err.println("Usage: broch --init");
+            System.err.println("Usage: ./broch.sh --init");
             parser.printUsage(System.err);
         }
     }
 
     static class BrochOptions {
-        @Option(name = "--init", usage = "sets up the build environment")
+        @Option(name = "--init", usage = "sets up the build environment", required = true)
         private boolean bootstrap;
         
-        @Option(name = "--home", usage = "path to project home, defaults to .build in current dir")
+        @Option(name = "--home", metaVar = "<path>" , usage = "path to project home, defaults to .build in current dir")
         private String home;
     }
 }
