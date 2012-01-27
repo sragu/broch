@@ -1,5 +1,6 @@
 package com.sragu.broch;
 
+import com.google.common.base.Strings;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
@@ -15,19 +16,21 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * Bootstraps common scripts to user.home
+ * Bootstraps common scripts to current dir (usually project home)
  */
 public class BootStrap {
     Logger logger = LoggerFactory.getLogger(BootStrap.class);
 
-    public void init() {
-        String brochHome = System.getProperty("user.home") + "/.broch";
-        System.setProperty("broch.home", brochHome);
+    public void init(String brochHome) {
+
+        if(Strings.isNullOrEmpty(brochHome)){
+            brochHome = ".build";
+        }
 
         File homeDir = new File(brochHome);
         homeDir.mkdir();
 
-        logger.debug("Home directory: {}", brochHome);
+        logger.debug("Home directory: {}", homeDir.getAbsolutePath());
         exportCommonScripts(homeDir, "scripts/.+");
     }
 

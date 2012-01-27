@@ -13,7 +13,7 @@ public class Main {
             parser.parseArgument(args);
 
             if (bean.bootstrap) {
-                new BootStrap().init();
+                new BootStrap().init(bean.home);
             }
 
         } catch (CmdLineException e) {
@@ -26,5 +26,8 @@ public class Main {
     static class BrochOptions {
         @Option(name = "--init", usage = "sets up the build environment")
         private boolean bootstrap;
+        
+        @Option(name = "--home", usage = "path to project home, defaults to .build in current dir")
+        private String home;
     }
 }
