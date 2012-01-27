@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="sample-project" default="main">
+  <available file=".build" property="bootstrap.done"/>
 
-    <target name="-init" unless="offline">
+    <target name="bootstrap" unless="bootstrap.done">
         <property name="build-jar-location" value=".broch-uber.jar"/>
         <get
             src="https://raw.github.com/sragu/mvn-repo/master/snapshots/com/sragu/broch-uber.jar" 
@@ -19,7 +20,7 @@
         <fileset dir=".build/scripts" includes="build-common-*.xml"/>
     </include>
 
-    <target name="main" description="say hello">
+    <target name="main" description="say hello" depends="bootstrap">
         <say word="Hello!"/>
     </target>
 </project>
