@@ -10,3 +10,7 @@ projects.
 * Extract only the dependent common scripts, dont unzip the world
 * Structure the common ant scripts as pluggable, isolated units.
 * Embedded ivy to fetch jars needed for common build scripts, such as (ant-contrib, sonar, cobertura, etc.)
+
+  
+## Misc
+"Broch" - http://en.wikipedia.org/wiki/Broch        
