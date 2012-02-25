@@ -1,8 +1,19 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 
-repositories {
+apply plugin: 'executable-jar'
+
+buildscript {
+  repositories {
     mavenCentral()
+  }
+  dependencies {
+    classpath 'net.nisgits.gradle:gradle-executable-jar-plugin:master-REL-6'
+  }
+}
+
+repositories {
+  mavenCentral()
 }
 
 sourceCompatibility = 1.6
@@ -16,13 +27,4 @@ dependencies {
     runtime group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.0'
 }
 
-task uber(type: Jar) {
-    dependsOn jar
-    dependsOn configurations.runtime
-    classifier 'uber'
-
-    from sourceSets*.output.classesDir
-    from sourceSets*.output.resourcesDir
-    from { configurations.runtime.collect { zipTree(it) } }
-    manifest { attributes 'Main-Class': 'com.sragu.broch.Main' }
-}
+mainClass = 'com.sragu.broch.Main'
