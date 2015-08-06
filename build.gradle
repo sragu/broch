@@ -24,3 +24,5 @@ dependencies {
 task fatCapsule(type: FatCapsule) {
   applicationClass 'com.sragu.broch.Main'
 }
+
+assemble.dependsOn 'fatCapsule'
