@@ -1,16 +1,10 @@
+plugins {
+  id "us.kirchmeier.capsule" version "1.0-rc1"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 
-apply plugin: 'executable-jar'
-
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath 'net.nisgits.gradle:gradle-executable-jar-plugin:master-REL-6'
-  }
-}
 
 repositories {
   mavenCentral()
@@ -27,4 +21,6 @@ dependencies {
     runtime group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.0'
 }
 
-mainClass = 'com.sragu.broch.Main'
+task fatCapsule(type: FatCapsule) {
+  applicationClass 'com.sragu.broch.Main'
+}
