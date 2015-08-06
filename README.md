@@ -3,6 +3,8 @@
 Bootstrap build environment, and allow sharing of ant build scripts across
 projects.
 
+[![Build Status](https://snap-ci.com/sragu/broch/branch/master/build_image)](https://snap-ci.com/sragu/broch/branch/master)
+
 ## Tasks
 * Allow sharing of ant scripts by bootstraping them. (done)
 * Include sample projects for usage, and run broch against them. (done)
